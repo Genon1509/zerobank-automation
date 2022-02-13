@@ -4,7 +4,7 @@ import com.zerobank.pages.MainPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 
-public class NavigationStepDefs {
+public class MainPageStepDefs {
 
     @When("the user navigates to {string} tab")
     public void the_user_navigates_to_tab(String tab) {
