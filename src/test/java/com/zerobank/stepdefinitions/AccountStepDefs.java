@@ -19,7 +19,7 @@ public class AccountStepDefs {
     @When("the user clicks on {string} link on the Account Summary page")
     public void the_user_clicks_on_link_on_the_Account_Summary_page(String link) {
         AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
-        accountSummaryPage.clickOnLink(link);
+        accountSummaryPage.navigateTo(link);
     }
 
     @Then("the {string} page should be displayed")
