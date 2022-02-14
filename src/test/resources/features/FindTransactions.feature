@@ -1,7 +1,7 @@
 
 Feature: Find Transactions in Account Activity
 
-  @wip
+
   Scenario: Search date range
     Given the user is logged in
     When the user navigates to "Online Banking" tab
