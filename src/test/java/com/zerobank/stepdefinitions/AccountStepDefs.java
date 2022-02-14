@@ -16,9 +16,11 @@ import java.util.List;
 
 public class AccountStepDefs {
 
+    AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
+    AccountActivityPage accountActivityPage = new AccountActivityPage();
+
     @When("the user clicks on {string} link on the Account Summary page")
     public void the_user_clicks_on_link_on_the_Account_Summary_page(String link) {
-        AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
         accountSummaryPage.navigateTo(link);
     }
 
@@ -29,7 +31,6 @@ public class AccountStepDefs {
 
     @Then("Account drop down should have {string} selected")
     public void account_drop_down_should_have_selected(String selected) {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         Select accountDropdown = new Select(accountActivityPage.accountDropdownElement);
 
         Assert.assertEquals("Expected option is not selected",selected,accountDropdown.getFirstSelectedOption().getText());
@@ -37,13 +38,11 @@ public class AccountStepDefs {
 
     @And("the user accesses the {string} tab")
     public void the_user_accesses_the_tab(String tab) {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         accountActivityPage.navigateTo(tab);
     }
 
     @When("the user enters date range from {string} to {string}")
     public void the_user_enters_date_range_from_to(String fromDate, String toDate) {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         accountActivityPage.fromDateInputBox.clear();
         accountActivityPage.toDateInputBox.clear();
         accountActivityPage.fromDateInputBox.sendKeys(fromDate);
@@ -52,7 +51,6 @@ public class AccountStepDefs {
 
     @When("clicks Find")
     public void clicks_Find() {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         accountActivityPage.findButton.click();
         BrowserUtils.waitFor(1);
     }
@@ -64,7 +62,6 @@ public class AccountStepDefs {
         int startDate = Integer.parseInt(fromDate);
         int endDate = Integer.parseInt(toDate);
 
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDates);
 
         for (String date : elementsText) {
@@ -77,7 +74,6 @@ public class AccountStepDefs {
 
     @Then("the results should be sorted by most recent date")
     public void the_results_should_be_sorted_by_most_recent_date() {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDates);
 
         List<Integer> datesAsInt = new ArrayList<>();
@@ -95,7 +91,6 @@ public class AccountStepDefs {
 
     @Then("the results table should not contain transactions dated {string}")
     public void the_results_table_should_not_contain_transactions_dated(String date) {
-        AccountActivityPage accountActivityPage = new AccountActivityPage();
         List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDates);
 
         Assert.assertFalse("Unwanted result date",elementsText.contains(date));
