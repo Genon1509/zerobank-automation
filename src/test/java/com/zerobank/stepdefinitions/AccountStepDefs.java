@@ -2,6 +2,7 @@ package com.zerobank.stepdefinitions;
 
 import com.zerobank.pages.AccountActivityPage;
 import com.zerobank.pages.AccountSummaryPage;
+import com.zerobank.pages.PayBillsPage;
 import com.zerobank.utilities.BrowserUtils;
 import com.zerobank.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -10,14 +11,15 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 
 public class AccountStepDefs {
 
     AccountSummaryPage accountSummaryPage = new AccountSummaryPage();
     AccountActivityPage accountActivityPage = new AccountActivityPage();
+    PayBillsPage payBillsPage = new PayBillsPage();
 
     @When("the user clicks on {string} link on the Account Summary page")
     public void the_user_clicks_on_link_on_the_Account_Summary_page(String link) {
@@ -174,6 +176,21 @@ public class AccountStepDefs {
             dummy.append(text);
         }
         Assert.assertEquals("Result found for withdrawal", 0, dummy.length());
+    }
+
+    @When("creates new payee using following information")
+    public void creates_new_payee_using_following_information(Map<String,String> information) {
+        payBillsPage.payeeNameInputBox.sendKeys(information.get("Payee Name"));
+        payBillsPage.payeeAddressInputBox.sendKeys(information.get("Payee Address"));
+        payBillsPage.accountInputBox.sendKeys(information.get("Account"));
+        payBillsPage.payeeDetailsInputBox.sendKeys(information.get("Payee details"));
+        BrowserUtils.waitFor(1);
+        payBillsPage.addButton.click();
+    }
+
+    @Then("message {string} should be displayed")
+    public void message_should_be_displayed(String message) {
+        Assert.assertEquals("Message is not as expected",message,payBillsPage.alertMessage.getText());
     }
 
 
