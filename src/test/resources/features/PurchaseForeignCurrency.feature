@@ -1,4 +1,4 @@
-
+@regression
 Feature: Purchase Foreign Currency
 
   Background:
@@ -23,7 +23,7 @@ Feature: Purchase Foreign Currency
       | New Zealand (dollar)  |
       | Singapore (dollar)    |
 
-  @wip
+
   Scenario: Error message for not selecting currency
     When user tries to calculate cost without selecting a currency
     Then error message should be displayed
