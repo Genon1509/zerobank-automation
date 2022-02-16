@@ -93,8 +93,87 @@ public class AccountStepDefs {
     public void the_results_table_should_not_contain_transactions_dated(String date) {
         List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDates);
 
-        Assert.assertFalse("Unwanted result date",elementsText.contains(date));
+        for (String elementsDate : elementsText) {
+            Assert.assertFalse("Unwanted result date",elementsDate.contains(date));
+        }
 
+    }
+
+    @When("the user enters description {string}")
+    public void the_user_enters_description(String description) {
+        accountActivityPage.descriptionInputBox.clear();
+        accountActivityPage.descriptionInputBox.sendKeys(description);
+    }
+
+    @Then("results table should only show descriptions containing {string}")
+    public void results_table_should_only_show_descriptions_containing(String string) {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDescriptions);
+
+        Assert.assertTrue("No result found",elementsText.size()>0);
+
+        for (String text : elementsText) {
+            Assert.assertTrue("Dose not contains expected string",text.contains(string));
+        }
+    }
+
+    @Then("results table should not show descriptions containing {string}")
+    public void results_table_should_not_show_descriptions_containing(String string) {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDescriptions);
+
+        for (String text : elementsText) {
+            Assert.assertFalse("Contains unwanted string",text.contains(string));
+        }
+    }
+
+    @Then("results table should show at least one result under Deposit")
+    public void results_table_should_show_at_least_one_result_under_Deposit() {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDeposits);
+        StringBuilder dummy = new StringBuilder("");
+
+        for (String text : elementsText) {
+            dummy.append(text);
+        }
+        Assert.assertTrue("No result for deposit",dummy.length()>0);
+    }
+
+    @Then("results table should show at least one result under Withdrawal")
+    public void results_table_should_show_at_least_one_result_under_Withdrawal() {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultWithdrawal);
+        StringBuilder dummy = new StringBuilder("");
+
+        for (String text : elementsText) {
+            dummy.append(text);
+        }
+        Assert.assertTrue("No result for withdrawal",dummy.length()>0);
+    }
+
+    @When("user selects type {string}")
+    public void user_selects_type(String string) {
+        Select typeDropdown = new Select(accountActivityPage.typeDropdownElement);
+        typeDropdown.selectByVisibleText(string);
+        BrowserUtils.waitFor(1);
+    }
+
+    @Then("results table should show no result under Withdrawal")
+    public void results_table_should_show_no_result_under_Withdrawal() {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultWithdrawal);
+        StringBuilder dummy = new StringBuilder("");
+
+        for (String text : elementsText) {
+            dummy.append(text);
+        }
+        Assert.assertEquals("Result found for withdrawal", 0, dummy.length());
+    }
+
+    @Then("results table should show no result under Deposit")
+    public void results_table_should_show_no_result_under_Deposit() {
+        List<String> elementsText = BrowserUtils.getElementsText(accountActivityPage.findResultDeposits);
+        StringBuilder dummy = new StringBuilder("");
+
+        for (String text : elementsText) {
+            dummy.append(text);
+        }
+        Assert.assertEquals("Result found for withdrawal", 0, dummy.length());
     }
 
 
