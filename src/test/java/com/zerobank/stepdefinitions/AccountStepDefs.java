@@ -9,6 +9,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.*;
@@ -191,6 +193,30 @@ public class AccountStepDefs {
     @Then("message {string} should be displayed")
     public void message_should_be_displayed(String message) {
         Assert.assertEquals("Message is not as expected",message,payBillsPage.alertMessage.getText());
+    }
+
+    @Then("following currencies should be available")
+    public void following_currencies_should_be_available(List<String> currencies) {
+        Select currencyDropdown = new Select(payBillsPage.currencyDropdownElement);
+        List<WebElement> options = currencyDropdown.getOptions();
+        List<String> elementsText = BrowserUtils.getElementsText(options);
+        Assert.assertTrue("Not contains all the currencies",elementsText.containsAll(currencies));
+    }
+
+    @When("user tries to calculate cost without selecting a currency")
+    public void user_tries_to_calculate_cost_without_selecting_a_currency() {
+        payBillsPage.calculateCostsButton.click();
+        BrowserUtils.waitFor(1);
+    }
+
+    @Then("error message should be displayed")
+    public void error_message_should_be_displayed() {
+        Alert alert = Driver.get().switchTo().alert();
+        String expectedMessage="Please, ensure that you have filled all the required fields with valid values.";
+
+        Assert.assertEquals("Message text is different than expected",expectedMessage,alert.getText());
+        BrowserUtils.waitFor(1);
+        alert.accept();
     }
 
 

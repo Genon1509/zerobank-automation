@@ -23,4 +23,13 @@ public class PayBillsPage extends BaseAccountPage{
     @FindBy(id = "alert_content")
     public WebElement alertMessage;
 
+    @FindBy(id = "pc_currency")
+    public WebElement currencyDropdownElement;
+
+    @FindBy(id = "pc_calculate_costs")
+    public WebElement calculateCostsButton;
+
+    @FindBy(id = "purchase_cash")
+    public WebElement purchaseButton;
+
 }
