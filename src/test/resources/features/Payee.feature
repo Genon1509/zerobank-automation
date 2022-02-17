@@ -1,4 +1,4 @@
-@regression
+@regression @jenkins
 Feature: Add new payee under pay bills
 
 
