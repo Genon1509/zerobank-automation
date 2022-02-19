@@ -1,4 +1,4 @@
-@regression
+@regression @parallel
 Feature: Purchase Foreign Currency
 
   Background:

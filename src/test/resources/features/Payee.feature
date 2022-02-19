@@ -1,4 +1,4 @@
-@regression @jenkins
+@regression @jenkins @parallel
 Feature: Add new payee under pay bills
 
 
