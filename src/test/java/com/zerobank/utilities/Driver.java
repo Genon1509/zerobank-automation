@@ -75,8 +75,9 @@ public class Driver {
                         e.printStackTrace();
                     }
             }
+
+            driverPool.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         }
-        driverPool.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
         return driverPool.get();
     }
