@@ -47,7 +47,6 @@ public class AccountStepDefs {
 
     @When("the user enters date range from {string} to {string}")
     public void the_user_enters_date_range_from_to(String fromDate, String toDate) {
-//        BrowserUtils.waitFor(2);
         accountActivityPage.fromDateInputBox.clear();
         accountActivityPage.toDateInputBox.clear();
         accountActivityPage.fromDateInputBox.sendKeys(fromDate);
