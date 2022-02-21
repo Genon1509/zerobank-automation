@@ -47,7 +47,7 @@ public class AccountStepDefs {
 
     @When("the user enters date range from {string} to {string}")
     public void the_user_enters_date_range_from_to(String fromDate, String toDate) {
-        BrowserUtils.waitFor(2);
+//        BrowserUtils.waitFor(2);
         accountActivityPage.fromDateInputBox.clear();
         accountActivityPage.toDateInputBox.clear();
         accountActivityPage.fromDateInputBox.sendKeys(fromDate);
@@ -56,7 +56,6 @@ public class AccountStepDefs {
 
     @When("clicks Find")
     public void clicks_Find() {
-        BrowserUtils.waitFor(2);
         accountActivityPage.findButton.click();
         BrowserUtils.waitFor(1);
     }
@@ -107,7 +106,6 @@ public class AccountStepDefs {
 
     @When("the user enters description {string}")
     public void the_user_enters_description(String description) {
-        BrowserUtils.waitFor(2);
         accountActivityPage.descriptionInputBox.clear();
         accountActivityPage.descriptionInputBox.sendKeys(description);
     }
@@ -185,7 +183,6 @@ public class AccountStepDefs {
 
     @When("creates new payee using following information")
     public void creates_new_payee_using_following_information(Map<String,String> information) {
-        BrowserUtils.waitFor(2);
         payBillsPage.payeeNameInputBox.sendKeys(information.get("Payee Name"));
         payBillsPage.payeeAddressInputBox.sendKeys(information.get("Payee Address"));
         payBillsPage.accountInputBox.sendKeys(information.get("Account"));
@@ -201,7 +198,6 @@ public class AccountStepDefs {
 
     @Then("following currencies should be available")
     public void following_currencies_should_be_available(List<String> currencies) {
-        BrowserUtils.waitFor(2);
         Select currencyDropdown = new Select(payBillsPage.currencyDropdownElement);
         List<WebElement> options = currencyDropdown.getOptions();
         List<String> elementsText = BrowserUtils.getElementsText(options);
@@ -210,7 +206,6 @@ public class AccountStepDefs {
 
     @When("user tries to calculate cost without selecting a currency")
     public void user_tries_to_calculate_cost_without_selecting_a_currency() {
-        BrowserUtils.waitFor(2);
         payBillsPage.calculateCostsButton.click();
         BrowserUtils.waitFor(1);
     }
