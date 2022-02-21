@@ -15,6 +15,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class Driver {
     private Driver() {
@@ -75,6 +76,8 @@ public class Driver {
                     }
             }
         }
+        driverPool.get().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
         return driverPool.get();
     }
     public static void closeDriver() {
